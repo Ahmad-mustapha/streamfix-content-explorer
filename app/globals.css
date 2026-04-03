@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-red: #E50914;
+  --color-bg-main: #0F0F0F;
+  --color-bg-sidebar: #121212;
+  --color-bg-card: #1A1A1A;
+}
+
+/* Custom design system for STREAMFIX */
+:root {
+  --background: #0F0F0F;
+  --foreground: #ffffff;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+  /* 🔴 Spice: Smooth scrolling for those long movie lists */
+  scroll-behavior: smooth;
+}
+
+/* Red Glow Pulse for "Now Trending" */
+@keyframes glow-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(229, 9, 20, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(229, 9, 20, 0); }
+}
+
+.trending-pulse {
+  animation: glow-pulse 2s infinite;
+}
+
+/* Scrollbar styling for a premium feel */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0F0F0F;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2A2A2A;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #E50914;
+}
+
+@layer base {
+  button {
+    @apply cursor-pointer transition-all active:scale-95;
+  }
+}
+
+/* 🔴 Spice: Gradient border effect for cards */
+.movie-card-gradient {
+  background: linear-gradient(180deg, rgba(229, 9, 20, 0) 0%, rgba(229, 9, 20, 0.2) 100%);
+}
