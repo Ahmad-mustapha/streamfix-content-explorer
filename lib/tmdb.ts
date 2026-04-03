@@ -4,7 +4,7 @@ const TMDB_ACCESS_TOKEN = process.env.NEXT_PUBLIC_TMDB_ACCESS_TOKEN;
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 const TMDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p";
 
-// Mock data for "Zero-Setup" Demo (Requirement: Engineering Judgment)
+// Fallback data for testing or when API key is not configured
 const MOCK_MOVIES: Movie[] = [
     {
         id: 1,
@@ -34,7 +34,7 @@ const MOCK_MOVIES: Movie[] = [
     }
 ];
 
-// 🛡 Secure Fetch: Using Read Access Token (Bearer) as per TMDB Docs
+// Standard fetch wrapper for TMDB API with auth headers
 async function tmdbFetch<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
     const isMock = !TMDB_ACCESS_TOKEN || TMDB_ACCESS_TOKEN === 'your_read_access_token_here';
     
@@ -81,7 +81,7 @@ async function tmdbFetch<T>(endpoint: string, options: RequestInit = {}): Promis
  * TMDB API Client Service
  */
 export const tmdb = {
-    // Get Trending Movies (Requirement: F-1)
+    // Fetch trending content
     getTrending: async (page: number = 1): Promise<MovieResponse> => {
         return tmdbFetch<MovieResponse>(`/trending/movie/day?page=${page}`);
     },
@@ -96,7 +96,7 @@ export const tmdb = {
         return tmdbFetch<MovieResponse>(`/search/movie?query=${encodeURIComponent(query)}&page=${page}`);
     },
 
-    // Get specific movie details for the detail page (Requirement: F-2)
+    // Fetch movie details by ID
     getMovieDetails: async (id: string | number): Promise<Movie> => {
         const isMock = !TMDB_ACCESS_TOKEN || TMDB_ACCESS_TOKEN === 'your_read_access_token_here';
         if (isMock) {
@@ -105,7 +105,7 @@ export const tmdb = {
         return tmdbFetch<Movie>(`/movie/${id}`);
     },
 
-    // Helper to build Image URLs (Requirement: 3.2 Performance)
+    // Helper to construct TMDB image URLs
     getImageUrl: (path: string | null, size: 'poster' | 'backdrop' = 'poster') => {
         if (!path) return null;
         const width = size === 'poster' ? 'w500' : 'original';

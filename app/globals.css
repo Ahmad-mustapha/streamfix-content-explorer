@@ -18,7 +18,6 @@ body {
   color: var(--foreground);
   font-family: 'Inter', system-ui, sans-serif;
   overflow-x: hidden;
-  /* 🔴 Spice: Smooth scrolling for those long movie lists */
   scroll-behavior: smooth;
 }
 
@@ -57,7 +56,7 @@ body {
   }
 }
 
-/* 🔴 Spice: Gradient border effect for cards */
+/* Overlay for movie cards transition */
 .movie-card-gradient {
   background: linear-gradient(180deg, rgba(229, 9, 20, 0) 0%, rgba(229, 9, 20, 0.2) 100%);
 }
