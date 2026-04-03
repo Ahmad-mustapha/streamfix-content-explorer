@@ -105,9 +105,18 @@ export const tmdb = {
         return tmdbFetch<Movie>(`/movie/${id}`);
     },
 
+    // Fetch similar movies
+    getSimilarMovies: async (id: string | number, page: number = 1): Promise<MovieResponse> => {
+        return tmdbFetch<MovieResponse>(`/movie/${id}/similar?page=${page}`);
+    },
+
     // Helper to construct TMDB image URLs
     getImageUrl: (path: string | null, size: 'poster' | 'backdrop' = 'poster') => {
         if (!path) return null;
+        if (path.includes('_mock.jpg')) {
+            // Unsplash placeholder so Next/Image doesn't fail on DNS for missing TMDB mock urls
+            return "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80&w=1080";
+        }
         const width = size === 'poster' ? 'w500' : 'original';
         return `${TMDB_IMAGE_BASE_URL}/${width}${path}`;
     }
