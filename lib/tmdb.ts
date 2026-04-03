@@ -119,5 +119,16 @@ export const tmdb = {
         }
         const width = size === 'poster' ? 'w500' : 'original';
         return `${TMDB_IMAGE_BASE_URL}/${width}${path}`;
+    },
+
+    // Filter results locally by Genre (Requirement: F-3 Logic)
+    filterByCategory: (results: Movie[], category?: string) => {
+        if (!category || category === 'All') return results;
+        const genreMap: Record<string, number> = {
+            'Action': 28, 'Adventure': 12, 'Animation': 16, 'Comedy': 35, 
+            'Crime': 80, 'Documentary': 99, 'Drama': 18, 'Family': 10751, 'Fantasy': 14
+        };
+        const targetId = genreMap[category];
+        return targetId ? results.filter(movie => movie.genre_ids?.includes(targetId)) : results;
     }
 };

@@ -48,8 +48,9 @@ export default async function MovieDetailPage({ params }: Props) {
                     <Image
                         src={backdropUrl}
                         alt=""
-                        fill
-                        className="object-cover opacity-5 blur-sm"
+                        width={1920}
+                        height={1080}
+                        className="w-full h-full object-cover opacity-5 blur-sm"
                         priority
                     />
                 )}
@@ -73,8 +74,9 @@ export default async function MovieDetailPage({ params }: Props) {
                         <Image
                             src={posterUrl}
                             alt={movie.title}
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                            width={500}
+                            height={750}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             priority
                         />
                     ) : (

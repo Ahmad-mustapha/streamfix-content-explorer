@@ -22,9 +22,9 @@ export default function MovieCard({ movie, priority = false }: MovieCardProps) {
                     <Image
                         src={posterUrl}
                         alt={movie.title}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 20vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        width={500}
+                        height={750}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         priority={priority}
                     />
                 ) : (

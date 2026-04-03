@@ -16,8 +16,9 @@ export default function FeaturedHero({ movie }: FeaturedHeroProps) {
                 <Image
                     src={backdropUrl}
                     alt={movie.title}
-                    fill
-                    className="object-cover opacity-60 md:opacity-50 transition-transform duration-700 group-hover:scale-[1.01]"
+                    width={1920}
+                    height={1080}
+                    className="w-full h-full object-cover opacity-60 md:opacity-50 transition-transform duration-700 group-hover:scale-[1.01]"
                     priority
                 />
             )}

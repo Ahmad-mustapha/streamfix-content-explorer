@@ -25,6 +25,7 @@ export default function TopBar({ user, isCollapsed, onToggleSidebar, onOpenMobil
             <div className="flex items-center gap-2 md:gap-4">
                 <button 
                     onClick={onOpenMobileSidebar}
+                    aria-label="Open navigation menu"
                     className="p-2 text-slate-400 hover:text-white lg:hidden"
                 >
                     <Menu className="w-5 h-5" />
@@ -32,6 +33,7 @@ export default function TopBar({ user, isCollapsed, onToggleSidebar, onOpenMobil
                 
                 <button 
                     onClick={onToggleSidebar}
+                    aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
                     className="hidden lg:flex items-center justify-center w-8 h-8 rounded border border-white/10 text-slate-500 hover:text-white hover:border-brand-red transition-all active:scale-95 group"
                 >
                     {isCollapsed ? (
@@ -45,8 +47,10 @@ export default function TopBar({ user, isCollapsed, onToggleSidebar, onOpenMobil
             {/* Middle: Search bar (Geometric style) */}
             <div className="flex-1 max-w-xl px-4 md:px-8 hidden md:block">
                 <div className="relative group">
+                    <label htmlFor="topbar-search" className="sr-only">Search movies</label>
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600 group-focus-within:text-brand-red transition-colors" />
                     <input 
+                        id="topbar-search"
                         type="text" 
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}

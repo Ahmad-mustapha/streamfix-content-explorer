@@ -17,19 +17,7 @@ export default async function SearchPage({ searchParams }: Props) {
     if (!query) return null;
 
     const data = await tmdb.searchMovies(query, page);
-    let results = data.results;
-
-    // Filter results locally if a genre is selected
-    if (genre && genre !== 'All') {
-        const genreMap: Record<string, number> = {
-            'Action': 28, 'Adventure': 12, 'Animation': 16, 'Comedy': 35, 
-            'Crime': 80, 'Documentary': 99, 'Drama': 18, 'Family': 10751, 'Fantasy': 14
-        };
-        const targetId = genreMap[genre as string];
-        if (targetId) {
-            results = results.filter(movie => movie.genre_ids?.includes(targetId));
-        }
-    }
+    const results = tmdb.filterByCategory(data.results, genre);
 
     return (
         <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">

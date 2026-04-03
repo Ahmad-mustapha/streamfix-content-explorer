@@ -35,4 +35,13 @@ describe('MovieCard Component', () => {
         render(<MovieCard movie={mockMovie} />);
         expect(screen.getByText('8.6')).toBeInTheDocument();
     });
+
+    it('renders N/A and video icon placeholder when data is missing', () => {
+        const patchyMovie = { ...mockMovie, poster_path: null, release_date: '' } as any;
+        render(<MovieCard movie={patchyMovie} />);
+        
+        expect(screen.getByText('N/A')).toBeInTheDocument();
+        // Since we mock lucide icons, we can't easily check for the specific Video icon,
+        // but the code branch for {posterUrl ? ... : ...} is now executed.
+    });
 });

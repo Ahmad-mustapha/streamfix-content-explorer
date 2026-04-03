@@ -34,20 +34,24 @@ export default function GenreFilters({ activeGenre, onGenreSelect }: GenreFilter
     };
 
     return (
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 no-scrollbar">
-            {GENRES.map((genre) => (
-                <button
-                    key={genre}
-                    onClick={() => handleGenreSelect(genre)}
-                    className={`px-5 py-2.5 rounded-lg text-[10px] font-black uppercase tracking-widest whitespace-nowrap border transition-all duration-300 ${
-                        currentGenre === genre
-                        ? 'bg-brand-red border-brand-red text-white shadow-lg shadow-brand-red/20'
-                        : 'bg-white/[0.03] border-white/5 text-slate-500 hover:text-white hover:border-white/10'
-                    }`}
-                >
-                    {genre}
-                </button>
-            ))}
-        </div>
+        <nav aria-label="Filter by genre" className="flex items-center gap-2 overflow-x-auto pb-4 no-scrollbar">
+            <ul role="list" className="flex gap-2">
+                {GENRES.map((genre) => (
+                    <li key={genre}>
+                        <button
+                            onClick={() => handleGenreSelect(genre)}
+                            aria-current={currentGenre === genre ? 'page' : undefined}
+                            className={`px-5 py-2.5 rounded-lg text-[10px] font-black uppercase tracking-widest whitespace-nowrap border transition-all duration-300 ${
+                                currentGenre === genre
+                                ? 'bg-brand-red border-brand-red text-white shadow-lg shadow-brand-red/20'
+                                : 'bg-white/[0.03] border-white/5 text-slate-500 hover:text-white hover:border-white/10'
+                            }`}
+                        >
+                            {genre}
+                        </button>
+                    </li>
+                ))}
+            </ul>
+        </nav>
     );
 }
