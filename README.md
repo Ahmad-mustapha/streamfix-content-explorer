@@ -1,69 +1,38 @@
 # 🎬 StreamFix: Movie & Series Explorer
 
-A high-performance content discovery application built with **Next.js 15**, **React 19**, and the **TMDB API**.
+A lightweight movie discovery tool built with **Next.js 15**, **React 19**, and **Zustand**.
 
 **Live Demo:** [https://frontend-assessment-mustapha.ahmadishola12.workers.dev](https://frontend-assessment-mustapha.ahmadishola12.workers.dev)
 
 ---
 
-## 🛠 Technical Decisions
+## 🚀 Setup Instructions
+I've made the setup process simple. Run these 4 commands to get the app running locally:
 
-### Data Fetching: TanStack Query + Native Fetch
-I used a hybrid approach to balance speed and interactivity.
-- **Server-Side (Native Fetch):** For the Hero and main movie grids, I use Next.js server components with `revalidate: 3600`. This enables Incremental Static Regeneration (ISR), so the page loads instantly from the cache while updating in the background.
-- **Client-Side (TanStack Query):** For dynamic sections like "Coming Soon," I use TanStack Query. It handles background refetching and state management without manual `useEffect` logic.
-
-### State Management: Zustand
-I chose **Zustand** for global state (like the Watchlist) because it's lightweight and has much less boilerplate than Redux. For navigation-related state (search, filters), I stick to **URL-driven state** so that every view is easily shareable.
+1. `git clone [repo-url]` 
+2. `npm install`
+3. Create `.env.local` and add `NEXT_PUBLIC_TMDB_ACCESS_TOKEN=[your_token]`
+4. `npm run dev`
 
 ---
 
-## 📂 Project Structure
+## 🛠 My Architecture Decisions
+I chose a **Hybrid Fetching** strategy to balance speed and interactivity:
+- **Server Components:** I use these for the main movie galleries. This ensures the initial page load is incredibly fast because the data is fetched at the Edge (Cloudflare).
+- **Zustand:** I used Zustand for the Watchlist because it's predictable, has zero boilerplate compared to Redux, and is easy for other developers to read.
+- **URL-State:** For searching and filtering, I used the URL bar as my "source of truth." This makes every search shareable and allows the back button to work naturally.
 
-```text
-├── app/                  # App Router (Global Layouts, Routing, Styles)
-├── components/           # UI components (Atomic Design)
-├── hooks/                # Custom React hooks (e.g., useDebounce)
-├── lib/                  # API client and utility functions
-├── types/                # TypeScript interfaces
-└── __tests__/            # Unit and integration tests
-```
+## ⚡ Performance Optimizations
+- **Edge Caching:** By deploying on a Cloudflare Worker, the app is physically closer to the user, reducing latency.
+- **Image Priority:** I used the `priority` attribute in `next/image` for "above-the-fold" movie posters to improve the LCP (Largest Contentful Paint).
+- **ISR (Incremental Static Regeneration):** I set a 1-hour revalidation time for my API calls so that repeated visits don't need to hit the TMDB API every single time.
 
----
+## ⚖️ Trade-offs & Limitations
+- **Testing Coverage:** Because of the tight timeline, I focused my unit tests on core components like the MovieCard rather than full end-to-end flows. Given more time, I would add Playwright tests for the full user journey.
+- **Styling:** I chose Tailwind CSS for speed of development. While it's great for rapid prototyping, in a massive team project I might consider CSS Modules for more scoped styles.
+- **Loading Skeletons:** I used basic loading states; with more time, I’d build more polished skeleton screens.
 
-## ⚡ Performance & Accessibility
-
-### Core Optimizations
-- **LCP & Image Priority:** I use `next/image` for all media. Above-the-fold images are marked with `priority` to improve the Largest Contentful Paint.
-- **Layout Stability:** Fixed aspect ratios on all containers prevent content jitter (CLS) as images load.
-- **Code Splitting:** I use `next/dynamic` for heavy client components to keep the initial JavaScript bundle as small as possible.
-- **Font Optimization:** Leveraging `next/font` to avoid layout shifts during font loading.
-
-### Accessibility
-- **Semantic HTML:** Using proper landmark elements (`<main>`, `<nav>`, `<header>`) and heading structures.
-- **ARIA Support:** Interactive elements are tagged with `aria-label` and `aria-current` for screen-reader compatibility.
-- **Keyboard Nav:** Focus-visible styles ensure clear navigation for keyboard-only users.
-
-### Edge Caching
-The project is configured for **Cloudflare Workers** via the **OpenNext** adapter.
-- `revalidate: N` is mapped to the Workers `cacheTtl` at the edge.
-- `force-cache` ensures static assets are served from the nearest global node.
-- I added an `x-cache-status` header (HIT/MISS) to verify edge caching behavior in production.
-
----
-
-## 🧪 Testing
-
-The project uses **Vitest** and **React Testing Library**. 
-- To run tests: `npm test`
-- Current coverage includes core UI components like `MovieCard` and `Breadcrumbs`, including edge cases for missing data and user interactions.
-
----
-
-## 🚀 Setup & Launch
-
-1. **Clone the repo:** `git clone [repo-url]`
-2. **Install dependencies:** `npm install`
-3. **Environment:** Create a `.env.local` file and add your `NEXT_PUBLIC_TMDB_ACCESS_TOKEN`.
-4. **Run Dev:** `npm run dev`
-5. **Production Build:** `npm run build`
+## 🌟 Bonus Tasks Attempted
+- **Unit Testing:** I implemented a testing suite using **Vitest** and **React Testing Library**. You can verify these by running `npm test`.
+- **Responsive Design:** The app is fully responsive from mobile up to ultra-wide monitors.
+- **Dark Mode Aesthetic:** I implemented a custom dark theme with high-contrast elements for a premium feel.
