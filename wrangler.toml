@@ -6,5 +6,5 @@ compatibility_flags = ["nodejs_compat"]
 [vars]
 NEXT_PUBLIC_TMDB_ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyYzBmNDk0MTc4MDM1ZWE0YmViNWJlMjI2MGNkMmY0YyIsIm5iZiI6MTc3NTE3NTMyMS45ODMsInN1YiI6IjY5Y2YwNjk5NzZhMGE4N2RlYjU5ZmVkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8JJ0dqzDjze5jXeWjezPZ7ttA8xOMhihIRgeZarl6AA"
 
-[site]
-bucket = ".open-next/assets"
+[assets]
+directory = ".open-next/assets"

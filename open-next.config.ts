@@ -13,7 +13,7 @@ const config = {
     middleware: {
         external: true,
         override: {
-            wrapper: "cloudflare-edge",
+            wrapper: "cloudflare-node",
             converter: "edge",
             proxyExternalRequest: "fetch",
             incrementalCache: "dummy",
