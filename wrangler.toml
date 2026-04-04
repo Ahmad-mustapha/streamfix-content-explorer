@@ -1,8 +1,10 @@
 name = "frontend-assessment-mustapha"
-pages_build_output_dir = ".open-next"
+main = ".open-next/worker.js"
 compatibility_date = "2024-11-18"
 compatibility_flags = ["nodejs_compat"]
 
-# You can add your ENV variable here too if you prefer
 [vars]
-# NEXT_PUBLIC_TMDB_ACCESS_TOKEN = "your_token_here"
+NEXT_PUBLIC_TMDB_ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyYzBmNDk0MTc4MDM1ZWE0YmViNWJlMjI2MGNkMmY0YyIsIm5iZiI6MTc3NTE3NTMyMS45ODMsInN1YiI6IjY5Y2YwNjk5NzZhMGE4N2RlYjU5ZmVkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8JJ0dqzDjze5jXeWjezPZ7ttA8xOMhihIRgeZarl6AA"
+
+[site]
+bucket = ".open-next/assets"
